@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Заметки, которые сохраняются в браузере и открываются без интернета." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Заметки" />
+
+  <title>Заметки</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <section class="hero">
+        <div class="hero__image-wrapper" aria-hidden="true">
+          <svg class="hero__image" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="280" fill="#0f172a" />
+            <rect x="78" y="36" width="164" height="208" rx="18" fill="#f8fafc" />
+            <path d="M206 36h18a18 18 0 0 1 18 18v18H206V36z" fill="#dbeafe" />
+            <path d="M206 36 L242 72 H206 Z" fill="#93c5fd" />
+            <rect x="102" y="92" width="116" height="10" rx="5" fill="#2563eb" />
+            <rect x="102" y="118" width="92" height="8" rx="4" fill="#94a3b8" />
+            <rect x="102" y="140" width="104" height="8" rx="4" fill="#cbd5e1" />
+            <rect x="102" y="162" width="72" height="8" rx="4" fill="#cbd5e1" />
+          </svg>
+        </div>
+        <div class="hero__content">
+          <p class="hero__eyebrow">Прогрессивное веб-приложение</p>
+          <h1 class="hero__title">Заметки</h1>
+          <p class="hero__text">
+            Добавляйте заметки в браузере. Они остаются на этом устройстве и доступны, даже если сеть пропадёт.
+          </p>
+          <div class="hero__controls">
+            <span id="network-status" class="badge badge--success">В сети</span>
+            <span id="sw-status" class="badge">Service Worker…</span>
+            <button id="install-btn" class="button button--primary button--small" type="button" hidden>
+              Установить
+            </button>
+          </div>
+          <p id="file-warning" class="hero__hint" hidden>
+            Файл открыт напрямую с диска. Service Worker так не запускается — откройте приложение через локальный сервер.
+          </p>
+        </div>
+      </section>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="notes-heading">
+        <div class="card__header">
+          <h2 id="notes-heading" class="card__title">Мои заметки</h2>
+        </div>
+
+        <form id="note-form" class="task-form">
+          <label class="visually-hidden" for="note-input">Текст заметки</label>
+          <textarea
+            id="note-input"
+            class="input"
+            rows="3"
+            maxlength="1000"
+            placeholder="О чём хотите запомнить?"
+            required
+          ></textarea>
+          <button class="button button--primary" type="submit">Добавить</button>
+        </form>
+
+        <p id="notes-count" class="stats">Всего заметок: 0</p>
+        <ul id="notes-list" class="task-list"></ul>
+        <p id="empty-state" class="empty-state">Пока нет заметок. Первая сохранится в этом браузере.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__content">
+        <div>
+          <h2 class="site-footer__title">Без сети</h2>
+          <p class="site-footer__text">
+            Service Worker отдаёт сохранённые HTML, CSS и JavaScript. Текст заметок лежит в localStorage, поэтому его можно читать и дополнять офлайн.
+          </p>
+        </div>
+        <div class="quote-box">
+          <p class="quote-box__label">Проверка</p>
+          <p class="quote-box__text">Application → Service Workers, Cache Storage и Manifest. Затем режим Offline и обновление страницы.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
